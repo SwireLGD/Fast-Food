@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import OrderDetails from './Components/Orders/Orders';
 import AddItems from './Components/MenuCard/MenuCard';
+import './App.css';
 
 type MenuItem = {
   name: string;
@@ -12,7 +13,7 @@ const App: React.FC = () => {
   const [order, setOrder] = useState<{ name: string; quantity: number; price: number }[]>([]);
   const [total, setTotal] = useState<number>(0);
 
-  const handleAddItem = (item: MenuItem) => {
+  const handleAddOrder = (item: MenuItem) => {
     const existingItem = order.findIndex((orderItem) => orderItem.name === item.name);
 
     if (existingItem !== -1) {
@@ -20,7 +21,6 @@ const App: React.FC = () => {
       updatedOrder[existingItem].quantity += 1;
       setOrder(updatedOrder);
     } else {
-
       const newItem = { name: item.name, quantity: 1, price: item.price };
       setOrder([...order, newItem]);
     }
@@ -29,10 +29,19 @@ const App: React.FC = () => {
     setTotal(newTotal);
   };
 
+  const handleDeleteOrder = (index: number) => {
+    const updatedOrder = [...order];
+    updatedOrder.splice(index, 1);
+    setOrder(updatedOrder);
+
+    const newTotal = updatedOrder.reduce((sum, orderItem) => sum + orderItem.quantity * orderItem.price, 0);
+    setTotal(newTotal);
+  };
+
   return (
-    <div>
-      <OrderDetails order={order} total={total} />
-      <AddItems onAdd={handleAddItem} />
+    <div className='FastFoodBox'>
+      <OrderDetails order={order} total={total} onDelete={handleDeleteOrder} image={''} />
+      <AddItems onAdd={handleAddOrder} />
     </div>
   );
 };

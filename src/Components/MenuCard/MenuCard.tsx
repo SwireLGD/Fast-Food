@@ -1,6 +1,7 @@
 import React from "react";
 import foodImage from '../../assets/food.png';
 import beverageImage from '../../assets/beverage.png';
+import './MenuCard.css';
 
 type MenuCardProp = {
     image: string;
@@ -23,14 +24,16 @@ const CardBtn: React.FC<AddOrderProp> = ({ onAdd }) => {
     ];
 
     return (
-        <div>
+        <div className="Menu">
             <h2>Add Items</h2>
-            {menu.map((item, index) => (
-                <button key={index} onClick={() => onAdd(item)}>
-                    <img src={item.image} alt={item.name} />
-                    <p>{item.name} - {item.price} KGS</p>
-              </button>
-            ))}
+            <div className="MenuItemsBox">
+                {menu.map((item, index) => (
+                    <button key={index} onClick={() => onAdd(item)} className="MenuBtn">
+                        <img src={item.image} alt={item.name} />
+                        <p>{item.name} - {item.price} KGS</p>
+                    </button>
+                ))}
+            </div>
         </div>
     );
 };
