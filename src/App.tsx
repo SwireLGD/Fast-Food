@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import OrderDetails from './Components/Orders/Orders';
 import AddItems from './Components/MenuCard/MenuCard';
 import './App.css';
@@ -14,29 +14,28 @@ const App: React.FC = () => {
   const [total, setTotal] = useState<number>(0);
 
   const handleAddOrder = (item: MenuItem) => {
-    const existingItem = order.findIndex((orderItem) => orderItem.name === item.name);
+    const existingItemIndex = order.findIndex((orderItem) => orderItem.name === item.name);
 
-    if (existingItem !== -1) {
+    if (existingItemIndex !== -1) {
       const updatedOrder = [...order];
-      updatedOrder[existingItem].quantity += 1;
+      updatedOrder[existingItemIndex].quantity += 1;
       setOrder(updatedOrder);
     } else {
       const newItem = { name: item.name, quantity: 1, price: item.price };
       setOrder([...order, newItem]);
     }
-
-    const newTotal = order.reduce((sum, orderItem) => sum + orderItem.quantity * orderItem.price, 0);
-    setTotal(newTotal);
   };
 
   const handleDeleteOrder = (index: number) => {
     const updatedOrder = [...order];
     updatedOrder.splice(index, 1);
     setOrder(updatedOrder);
-
-    const newTotal = updatedOrder.reduce((sum, orderItem) => sum + orderItem.quantity * orderItem.price, 0);
-    setTotal(newTotal);
   };
+
+  useEffect(() => {
+    const newTotal = order.reduce((sum, orderItem) => sum + orderItem.quantity * orderItem.price, 0);
+    setTotal(newTotal);
+  }, [order]);
 
   return (
     <div className='FastFoodBox'>
