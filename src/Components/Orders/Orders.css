@@ -1,28 +1,28 @@
 .Orders {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid black;
-    width: 40%;
-    height: 400px;
-    align-items: center;
-    border-radius: 15px;
-    background-color: white;
-    font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  width: 40%;
+  height: 400px;
+  align-items: center;
+  border-radius: 15px;
+  background-color: white;
+  font-weight: bold;
 }
 
 .EmptyOrder {
-    font-size: 18px;
-    font-weight: bold;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .ListItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
 }
 
 .RemoveBtn {
-    background: none;
-    border: none;
+  background: none;
+  border: none;
 }
